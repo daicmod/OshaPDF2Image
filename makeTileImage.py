@@ -32,7 +32,7 @@ def display():
         [-1.0, -1.0, 0.0])
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
-    glBindTexture(GL_TEXTURE_2D, img2tex('out_img/result/transopencv_concat_tile.png'))
+    glBindTexture(GL_TEXTURE_2D, img2tex('out_img/result/tile.png'))
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
 
@@ -74,7 +74,7 @@ def mouse(button, state, x, y):
           GL_UNSIGNED_BYTE,  #type
         )
         img = Image.frombuffer('RGBA', (1000, 1000), buf)
-        img.save('tmp.png')
+        img.save('OshaTile.png')
 
 glutInit()
 glutInitWindowSize(1000, 1000)
