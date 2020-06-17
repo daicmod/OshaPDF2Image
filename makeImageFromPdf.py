@@ -75,7 +75,10 @@ def makeShadow(image, iterations, border, offset, backgroundColour, shadowColour
     return shadow
 
 # makeShadowを全ての画像にかけたいだけの関数
-def makeShadowList(base, images):
+def makeShadowList(base, images):    
+    img_dir = pathlib.Path('out_img/shadow')
+    if not img_dir.exists():
+        img_dir.mkdir()
     for index, image in enumerate(images):
         print('\rSaving...',end='')
         image = Image.open('out_img/' + base + '-{}.png'.format(index + 1))
@@ -104,7 +107,7 @@ def makeTileImage(base, images):
 
 def main():
     base, images = makePdf2Image('in_pdf.pdf')
-    #makeShadowList(base, images)
+    makeShadowList(base, images)
     makeTileImage(base, images)
 
 if __name__ == '__main__':
