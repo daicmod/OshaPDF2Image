@@ -9,6 +9,10 @@ from PIL import Image, ImageFilter
 
 # PDFから一旦画像を生成する
 def makePdf2Image(pdf):
+    pdf_dir = pathlib.Path('in_pdf')
+    if not pdf_dir.exists():
+        pdf_dir.mkdir()
+        
     pdf_file = pathlib.Path('in_pdf/' + pdf)
     img_dir = pathlib.Path('out_img')
     if not img_dir.exists():
@@ -86,7 +90,7 @@ def makeShadowList(base, images):
         img.save('out_img/shadow/' + base + '_shadow-{}.png'.format(index + 1))
         print('\rSave:' + base + '_shadow-{}.png\033[K'.format(index + 1))
 
-# 1次元リストを2次元リストに変換する
+# 1次元リストを2次元リストに変換する、何行にしたいかだけちゃんと指定する
 def convert_1d_to_2d(l, cols):
     return [l[i:i + cols] for i in range(0, len(l), cols)]
 
@@ -95,6 +99,10 @@ def concat_tile(im_list_2d):
     return cv2.vconcat([cv2.hconcat(im_list_h) for im_list_h in im_list_2d])
 
 def makeTileImage(base, images):
+    img_dir = pathlib.Path('out_img/result')
+    if not img_dir.exists():
+        img_dir.mkdir()
+
     imgs = []
     for index, image in enumerate(images):
         img = cv2.imread('out_img/shadow/' + base + '_shadow-{}.png'.format(index + 1))
